@@ -1,10 +1,9 @@
-import express from "express";
 import { Book } from "../models/books.models.js";
 
 
 
 // Create a new book
-export const createBookController = async(req, res)=> {
+export const createBook = async(req, res)=> {
     try {
         const { title, author, publishedDate, pages, genre, price } = req.body;
         const newBook = new Book({ title, author, publishedDate, pages, genre, price });
@@ -16,7 +15,7 @@ export const createBookController = async(req, res)=> {
 }
 
 // Get all books
-export const getAllBooksController = async(req, res) => {
+export const getAllBooks = async(req, res) => {
     try {
         const books = await Book.find();
         res.status(200).json(books);
@@ -26,11 +25,11 @@ export const getAllBooksController = async(req, res) => {
 }
 
 
-// Get a book by Name
-export const getBookByIdController = async(req, res) => {
+// Get a book by id
+export const getBookById = async(req, res) => {
    try {
-    const {name}=req.body;
-    const book=await Book.findOne({name});
+    const {id}=req.params.id;
+    const book=await Book.findOne({id});
     res.status(200).json(book);
    } catch (error) {
     res.status(500).json({ message: error.message });
@@ -38,11 +37,11 @@ export const getBookByIdController = async(req, res) => {
 
 
 // Update a book by Name
-export const updateBookController = async(req, res) => {
+export const updateBook = async(req, res) => {
     try {
-        const {name}=req.body;
+        const {id}=req.params.id; 
         const updatedData=req.body;
-        const book=await Book.findOneAndUpdate({name},updatedData,{returnDocument:"after"});
+        const book=await Book.findOneAndUpdate({id},updatedData,{returnDocument:"after"});
         res.status(200).json(book);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -51,10 +50,10 @@ export const updateBookController = async(req, res) => {
 
 
 // Delete a book by Name
-export const deleteBookController = async(req, res) => {
+export const deleteBook = async(req, res) => {
     try {
-        const {name}=req.body;
-        await Book.findOneAndDelete({name});
+        const {id}=req.body;
+        await Book.findOneAndDelete({id});
         res.status(200).json({ message: "Book deleted successfully" });
     } catch (error) {
         res.status(500).json({ message: error.message });
