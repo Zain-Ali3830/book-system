@@ -3,7 +3,7 @@ import { createBook, getAllBooks, getBookById, updateBook, deleteBook } from '..
 import { validateBookData, validateBookIdParam, validateBookBeforeDelete } from '../middlewares/books.middlewares.js';
 const router = express.Router();
 
-router.route('/books')
+router.route('/getbooks')
     .get(getAllBooks)
 router.route('/getbook/:id')
     .get(validateBookIdParam, getBookById);
