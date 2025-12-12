@@ -1,12 +1,17 @@
 import express from 'express';
 import { createBook, getAllBooks, getBookById, updateBook, deleteBook } from '../controllers/books.controllers.js';
-
+import { validateBookData, validateBookIdParam, validateBookBeforeDelete } from '../middlewares/books.middlewares.js';
 const router = express.Router();
 
-router.get('/books', getAllBooks);
-router.get('/getbook/:id', getBookById);
-router.post('/addbook', createBook);
-router.put('/updatebook/:id', updateBook);
-router.delete('/deletebook/:id', deleteBook);
+router.route('/books')
+    .get(getAllBooks)
+router.route('/getbook/:id')
+    .get(validateBookIdParam, getBookById);
+router.route('/addbook')
+    .post(validateBookData, createBook);
+router.route('/updatebook/:id')
+    .put(validateBookIdParam, updateBook);
+router.route('/deletebook/:id')
+    .delete(validateBookBeforeDelete, deleteBook);
 
 export default router;
