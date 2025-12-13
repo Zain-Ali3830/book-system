@@ -13,10 +13,27 @@ const BookModal = ({ isOpen, onClose, onSave, book }) => {
   });
 
   useEffect(() => {
-    if (book) {
-      setFormData(book);
-    }
-  }, [book]);
+  if (book) {
+    setFormData({
+      title: book.title || "",
+      author: book.author || "",
+      publishedDate: book.publishedDate || "",
+      pages: book.pages || "",
+      genre: book.genre || "",
+      price: book.price || "",
+    });
+  } else {
+    setFormData({
+      title: "",
+      author: "",
+      publishedDate: "",
+      pages: "",
+      genre: "",
+      price: "",
+    });
+  }
+}, [book, isOpen]);
+
 
   if (!isOpen) return null;
 

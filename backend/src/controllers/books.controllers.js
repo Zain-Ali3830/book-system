@@ -39,9 +39,9 @@ export const getBookById = async(req, res) => {
 // Update a book by Name
 export const updateBook = async(req, res) => {
     try {
-        const {id}=req.params; 
+        const id=req.params.id; 
         const updatedData=req.body;
-        const book=await Book.findOneAndUpdate({id},updatedData,{returnDocument:"after"});
+        const book=await Book.findByIdAndUpdate(id,updatedData,{returnDocument:"after"});
         res.status(200).json(book);
     } catch (error) {
         res.status(500).json({ message: error.message });

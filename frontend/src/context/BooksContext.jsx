@@ -24,6 +24,10 @@ export const BooksProvider = ({ children }) => {
 
   const handleUpdateBook = async (updatedBook) => {
     const book = await updateBook(updatedBook._id, updatedBook);
+     if (!book) {
+    console.error("Update API returned null");
+    return;
+  }
     setBooks((prev) =>
       prev.map((b) => (b._id === updatedBook._id ? book : b))
     );
@@ -38,8 +42,8 @@ export const BooksProvider = ({ children }) => {
 
 const filteredBooks = books.filter(
   (b) =>
-    b.title.toLowerCase().includes(search.toLowerCase()) ||
-    b.author.toLowerCase().includes(search.toLowerCase())
+    b.title?.toLowerCase().includes(search.toLowerCase()) ||
+    b.author?.toLowerCase().includes(search.toLowerCase())
 );
 
   useEffect(() => {
