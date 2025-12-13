@@ -56,7 +56,7 @@ const BooksTable = ({ onEdit }) => {
                   ${book.price}
                 </td>
 
-                <td className="px-6 py-4 text-center space-x-2">
+                <td className="px-6 py-4 text-center space-x-2 space-y-2">
                   <button
                     onClick={() => onEdit(book)}
                     className="px-4 py-1.5 text-sm rounded-lg bg-yellow-500 text-white hover:bg-yellow-600 transition"
