@@ -1,6 +1,6 @@
 import React from "react";
 import { useBooks } from "../context/BooksContext";
-const BooksTable = ({ onEdit }) => {
+const BooksTable = ({ onEdit , searchedBooks}) => {
   const { books, deleteBookById } = useBooks();
 
   return (

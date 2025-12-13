@@ -67,6 +67,7 @@ const App = () => {
         onEdit={(book) => {
           setSelectedBook(book);
           setIsModalOpen(true);
+          searchedBooks=filteredBooks;
         }}
         //  onDelete={handleDeleteBook}
       />
