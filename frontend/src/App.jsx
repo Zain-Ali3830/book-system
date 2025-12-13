@@ -4,6 +4,8 @@ import SearchBar from './components/SearchBar'
 import BooksTable from './components/booksTable'
 import BookModal from './components/BookModal'
 import { fetchBooks } from './api/book.api'
+import { updateBook } from './api/book.api'
+import { deleteBook } from './api/book.api'
 
 const App = () => {
   const [books, setBooks] = useState([]);
@@ -11,11 +13,15 @@ const App = () => {
   const [selectedBook, setSelectedBook] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
- 
+
+
+
 
   useEffect(() => {
     fetchBooks()
-      .then((data) => setBooks(data))
+      .then((data) => {setBooks(data)
+        console.log(data);
+      })
       .catch((error) => console.error('Error fetching books:', error));
   }, []);
 
@@ -27,23 +33,18 @@ const App = () => {
 
   const handleSave = async (data) => {
     if (selectedBook) {
-      await axios.put(
-        `http://localhost:5000/api/books/${selectedBook._id}`,
-        data
-      );
-    } else {
-      await axios.post("http://localhost:5000/api/books", data);
+     updateBook(selectedBook._id, data);
     }
+    //  else {
+    //   await axios.post("http://localhost:5000/api/books", data);
+    // }
 
     setIsModalOpen(false);
     setSelectedBook(null);
     fetchBooks();
   };
 
-  const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/api/books/${id}`);
-    fetchBooks();
-  };
+
 
   return (
     <div className="p-6">
@@ -62,12 +63,12 @@ const App = () => {
       </div>
 
       <BooksTable
-        books={filteredBooks}
+        // books={filteredBooks}
         onEdit={(book) => {
           setSelectedBook(book);
           setIsModalOpen(true);
         }}
-        onDelete={handleDelete}
+        //  onDelete={handleDeleteBook}
       />
 
       <BookModal

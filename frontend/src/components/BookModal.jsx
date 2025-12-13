@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-
+import { addBook } from "../api/book.api";
+import { useBooks } from "../context/BooksContext";
 const BookModal = ({ isOpen, onClose, onSave, book }) => {
+  const { handleCreateBook } = useBooks();
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -23,7 +25,9 @@ const BookModal = ({ isOpen, onClose, onSave, book }) => {
   };
 
   const handleSubmit = () => {
+    addBook(formData);
     onSave(formData);
+    handleCreateBook(formData);
   };
 
   return (

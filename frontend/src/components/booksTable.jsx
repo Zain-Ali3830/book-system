@@ -1,6 +1,8 @@
 import React from "react";
+import { useBooks } from "../context/BooksContext";
+const BooksTable = ({ onEdit }) => {
+  const { books, deleteBookById } = useBooks();
 
-const BooksTable = ({ books, onEdit, onDelete }) => {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full border border-gray-300">
@@ -33,7 +35,7 @@ const BooksTable = ({ books, onEdit, onDelete }) => {
                 </button>
 
                 <button
-                  onClick={() => onDelete(book._id)}
+                  onClick={() => deleteBookById(book._id)}
                   className="px-3 py-1 bg-red-500 text-white rounded"
                 >
                   Delete

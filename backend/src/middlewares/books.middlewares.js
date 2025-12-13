@@ -16,14 +16,15 @@ export const validateBookData = (req, res, next) => {
       };
 
 
-export const validateBookBeforeDelete = (req, res, next) => {
-    const { id } = req.body;
+export const validateBookBeforeDelete = async (req, res, next) => {
+    const  id  = req.params.id;
     if (!id) {
-      return res.status(400).json({ message: "Book ID is required for deletion" });
+      
+      return res.status(400).json({ message: "Book ID is required for deletion"});
     }
-    const book = Book.findOne({ id });
+    const book = await Book.findById(id);
     if (!book) {
-      return res.status(404).json({ message: "Book not found" });
+      return res.status(404).json({ message: `Book with ID ${id} not found` });
     }
     next();
   };    

@@ -57,6 +57,7 @@ export const updateBook = async (id, bookData) => {
 export const deleteBook = async (id) => {
   try {
     const response = await axios.delete(`${API_BASE_URL}/deletebook/${id}`);
+    console.log('Deleted book ID:', id);
     return response.data;
   } catch (error) {
     console.error('Error deleting book:', error);
