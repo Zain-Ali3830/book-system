@@ -36,7 +36,7 @@ export const getBookById = async(req, res) => {
    }}
 
 
-// Update a book by Name
+// Update a book 
 export const updateBook = async(req, res) => {
     try {
         const id=req.params.id; 
