@@ -3,6 +3,7 @@ import axios from 'axios'
 import SearchBar from './components/SearchBar'
 import BooksTable from './components/booksTable'
 import BookModal from './components/BookModal'
+import { fetchBooks } from './api/book.api'
 
 const App = () => {
   const [books, setBooks] = useState([]);
@@ -10,13 +11,12 @@ const App = () => {
   const [selectedBook, setSelectedBook] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const fetchBooks = async () => {
-    const res = await axios.get("http://localhost:5000/api/books");
-    setBooks(res.data);
-  };
+ 
 
   useEffect(() => {
-    fetchBooks();
+    fetchBooks()
+      .then((data) => setBooks(data))
+      .catch((error) => console.error('Error fetching books:', error));
   }, []);
 
   const filteredBooks = books.filter(
