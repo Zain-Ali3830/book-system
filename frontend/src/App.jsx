@@ -25,11 +25,11 @@ const App = () => {
       .catch((error) => console.error('Error fetching books:', error));
   }, []);
 
-  const filteredBooks = books.filter(
-    (b) =>
-      b.title.toLowerCase().includes(search.toLowerCase()) ||
-      b.author.toLowerCase().includes(search.toLowerCase())
-  );
+  // const filteredBooks = books.filter(
+  //   (b) =>
+  //     b.title.toLowerCase().includes(search.toLowerCase()) ||
+  //     b.author.toLowerCase().includes(search.toLowerCase())
+  // );
 
   const handleSave = async (data) => {
     if (selectedBook) {
@@ -49,7 +49,7 @@ const App = () => {
   return (
     <div className="p-6">
       <div className="flex justify-between mb-4">
-        <SearchBar search={search} setSearch={setSearch} />
+        <SearchBar  />
 
         <button
           onClick={() => {
@@ -63,13 +63,10 @@ const App = () => {
       </div>
 
       <BooksTable
-        // books={filteredBooks}
         onEdit={(book) => {
           setSelectedBook(book);
           setIsModalOpen(true);
-          searchedBooks=filteredBooks;
         }}
-        //  onDelete={handleDeleteBook}
       />
 
       <BookModal

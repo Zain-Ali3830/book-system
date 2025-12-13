@@ -31,6 +31,8 @@ const BookModal = ({ isOpen, onClose, onSave, book }) => {
     else {
     await handleCreateBook(formData);
   }
+    onSave();
+    onClose();
   };
 
   return (

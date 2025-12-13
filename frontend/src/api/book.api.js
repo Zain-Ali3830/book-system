@@ -16,9 +16,9 @@ export const fetchBooks = async () => {
 
 
 // Fetch a single book by ID
-export const fetchBookById = async (id) => {
+export const searchedBooks = async (title) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/getbook/${id}`);
+    const response = await axios.get(`${API_BASE_URL}/getbook/${title}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching book:', error);

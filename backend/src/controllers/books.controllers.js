@@ -28,8 +28,8 @@ export const getAllBooks = async(req, res) => {
 // Get a book by id
 export const getBookById = async(req, res) => {
    try {
-    const {id}=req.params.id;
-    const book=await Book.findOne({id});
+    const title=req.params.title;
+    const book=await Book.findMany({title});
     res.status(200).json(book);
    } catch (error) {
     res.status(500).json({ message: error.message });

@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.route('/getbooks')
     .get(getAllBooks)
-router.route('/getbook/:id')
+router.route('/getbook/:title')
     .get(validateBookIdParam, getBookById);
 router.route('/addbook')
     .post(validateBookData, createBook);
